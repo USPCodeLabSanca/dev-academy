@@ -19,7 +19,8 @@ export function Signup({history}){
 		try{
 			response = await api.post("/users", {email, password});
 		} catch(e) {
-			if(e.response) return alert("User already exists");
+			if(e.response) return alert("Registration is currently disabled");
+			// if(e.response) return alert("User already exists");
 			else return alert("Network error");
 		}
 		const token = response.data.token;

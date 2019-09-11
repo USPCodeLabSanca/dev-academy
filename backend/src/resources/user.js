@@ -9,6 +9,8 @@ const router = Router();
 const usersCollection = database.collection("users");
 
 router.post("/", async (req, res) => {
+	return res.status(400).send(Response.error("Registration is currently disabled."));
+
 	const email = req.body.email;
 	const password = req.body.password;
 
