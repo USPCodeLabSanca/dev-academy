@@ -182,6 +182,7 @@ Estrutura sugerida para as pastas do projeto:
 
 <img src = "https://i.imgur.com/cMNUZZK.png">
 
+<a href = "https://dev-academy.netlify.com/home">Site de Exemplo</a>
 
 
 
