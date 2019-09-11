@@ -47,13 +47,18 @@ node index.js
 
 Segue um  **<a href = "https://www.digitalocean.com/community/tutorials/como-instalar-o-node-js-no-ubuntu-16-04-pt">tutorial de instalação no ubuntu</a>** e um **<a href = "https://nodesource.com/blog/installing-nodejs-tutorial-windows/">no Windows</a>**. A versão LTS do Node já instala automaticamente o **npm**, **gerenciador** que permite instalação e distribuição facilitadas de pacotes voltados ao ambiente node.
 
-##### <span style = "color:red">Playlist fortemente recomendada sobre  javascript e node:</span>
+### <span style = "color:red">Playlist fortemente recomendada sobre  javascript e node:</span>
 
-<a href = "https://www.youtube.com/watch?v=po9Ik_v5koU">Programação funcional vs POO</a>
-<a href = "https://www.youtube.com/watch?v=8aGhZQkoFbQ">Event Loop </a>
-<a href = "https://www.youtube.com/watch?v=7Bs4-rqbCQc">JS Assíncrono: Callbacks, Promises e Async/Await</a>
-<a href = "https://www.youtube.com/watch?v=cHvh-munKyA">Arrow Functions</a>
-<a href = "https://www.youtube.com/watch?v=STpZJEEGImM"> Desestruturação (Essencial para entender States)</a>
+.1 <a href = "https://www.youtube.com/watch?v=po9Ik_v5koU">Programação funcional vs POO</a>
+
+.2 <a href = "https://www.youtube.com/watch?v=8aGhZQkoFbQ">Event Loop </a>
+
+.3 <a href = "https://www.youtube.com/watch?v=7Bs4-rqbCQc">JS Assíncrono: Callbacks, Promises e Async/Await</a>
+
+.4 <a href = "https://www.youtube.com/watch?v=cHvh-munKyA">Arrow Functions</a>
+
+.5 <a href = "https://www.youtube.com/watch?v=STpZJEEGImM"> Desestruturação (Essencial para entender States)</a>
+
 
 #### Git
 
