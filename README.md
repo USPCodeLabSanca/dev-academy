@@ -1,7 +1,7 @@
 # Especificações do Projeto - dev.boost(2019.2) 
 
 ## Objetivo:
-Desenvolver um **site educacional de vídeos** que utilize o paradigma de   **<a href = "https://www.youtube.com/watch?v=xfGciVdbktI">SPA</a>** (**S**ingle **P**age **A**pplication). O site deve  possuir uma **página de login**, uma **página de cadastro**, uma **página de vídeos** e uma **página de gerenciamento**, que permita adicionar ou remover um novo vídeo ao site. 
+Desenvolver um **site educacional de vídeos** que utilize o paradigma de   **<a href = "https://www.youtube.com/watch?v=xfGciVdbktI">SPA</a>** (**S**ingle **P**age **A**pplication). O site deve  possuir uma **página de login**, uma **página de vídeos** e uma **página de gerenciamento**, que permita adicionar ou remover um novo vídeo ao site. 
 
 ## Abordagem 
 O projeto é dividido em duas pastas: **Front-End** e **Back-End**. 
@@ -47,12 +47,18 @@ node index.js
 
 Segue um  **<a href = "https://www.digitalocean.com/community/tutorials/como-instalar-o-node-js-no-ubuntu-16-04-pt">tutorial de instalação no ubuntu</a>** e um **<a href = "https://nodesource.com/blog/installing-nodejs-tutorial-windows/">no Windows</a>**. A versão LTS do Node já instala automaticamente o **npm**, **gerenciador** que permite instalação e distribuição facilitadas de pacotes voltados ao ambiente node.
 
-##### <span style = "color:red">Playlist fortemente recomendada sobre  javascript e node:</span>
+### <span style = "color:red">Playlist fortemente recomendada sobre  javascript e node:</span>
 
-<a href = "https://www.youtube.com/watch?v=po9Ik_v5koU">Programação funcional vs POO</a>
-<a href = "https://www.youtube.com/watch?v=8aGhZQkoFbQ">Event Loop </a>
-<a href = "https://www.youtube.com/watch?v=7Bs4-rqbCQc">JS Assíncrono: Callbacks, Promises e Async/Await</a>
-<a href = "https://www.youtube.com/watch?v=cHvh-munKyA">Arrow Functions</a>
+.1 <a href = "https://www.youtube.com/watch?v=po9Ik_v5koU">Programação funcional vs POO</a>
+
+.2 <a href = "https://www.youtube.com/watch?v=8aGhZQkoFbQ">Event Loop </a>
+
+.3 <a href = "https://www.youtube.com/watch?v=7Bs4-rqbCQc">JS Assíncrono: Callbacks, Promises e Async/Await</a>
+
+.4 <a href = "https://www.youtube.com/watch?v=cHvh-munKyA">Arrow Functions</a>
+
+.5 <a href = "https://www.youtube.com/watch?v=STpZJEEGImM"> Desestruturação (Essencial para entender States)</a>
+
 
 #### Git
 
@@ -172,7 +178,7 @@ Sugere-se começar o desenvolvimento da aplicação pelo **design** das páginas
 
 Em seguida, sugere-se desenvolver a lógica da página de **gerenciamento** de vídeos, especificamente as funções de **adicionar** e **remover** vídeos, bem como retornar a lista. Futuramente, a lista de vídeos será requerida no Back-End. Por hora, sugere-se contornar este problema com a criação de um arquivo **```lista.js```** na pasta pública do projeto. Tal arquivo será importado por ```index.js``` e deverá possuir, além de uma lista inicialmente, vazias, funcoes **getLista**, **AdicionaItem** e **DeleteItem**. Componentes que se utilizem da lista também deverão importá-lo. 
 
-**Não é necessário carregar vídeos inteiros na aplicação**. A intenção é que se use o ```<embed></embed>``` de vídeos do youtube. A aplicação apenas salvará links para estes vídeos, mesmo quando o Back-End for implementado. A parte lógica das página de **Login** e **Cadastro** é amarrada ao Back-End e **não é prioridade** nesta etapa de desenvolvimento. 
+**Não é necessário carregar vídeos inteiros na aplicação**. A intenção é que se use o ```<embed></embed>``` de vídeos do youtube. A aplicação apenas salvará links para estes vídeos, mesmo quando o Back-End for implementado. A parte lógica da página de **Login** é amarrada ao Back-End e **não é prioridade** nesta etapa de desenvolvimento. 
 
 A página gerada **não é persistiva**, isto é, modificações na lista de vídeos se perdem ao se atualizar a página. Entretanto, deverá ser possível adicionar um vídeo pela página de gerenciamento, e acessar a lista de vídeos criados na página de vídeos. Cada página, isto é, **login**, **cadastro**, **vídeos** e **gerenciamento** **deve possuir seu próprio componente**. 
 
@@ -183,6 +189,10 @@ Estrutura sugerida para as pastas do projeto:
 <img src = "https://i.imgur.com/cMNUZZK.png">
 
 <a href = "https://dev-academy.netlify.com/home">Site de Exemplo</a>
+
+Login: public@gmail.com
+Senha: public
+
 
 
 
