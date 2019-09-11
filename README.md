@@ -53,6 +53,7 @@ Segue um  **<a href = "https://www.digitalocean.com/community/tutorials/como-ins
 <a href = "https://www.youtube.com/watch?v=8aGhZQkoFbQ">Event Loop </a>
 <a href = "https://www.youtube.com/watch?v=7Bs4-rqbCQc">JS Assíncrono: Callbacks, Promises e Async/Await</a>
 <a href = "https://www.youtube.com/watch?v=cHvh-munKyA">Arrow Functions</a>
+<a href = "https://www.youtube.com/watch?v=STpZJEEGImM"> Desestruturação (Essencial para entender States)</a>
 
 #### Git
 
