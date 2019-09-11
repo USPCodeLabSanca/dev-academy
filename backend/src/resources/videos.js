@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 	}
 
 	let snapshot = await videoCollection.add({title, url, description, ownerEmail, timestamp})
-	res.status(200).send(Response.success("ok", snapshot.id));
+	res.status(200).send(Response.success("ok", { id: snapshot.id, timestamp }));
 });
 
 router.get("/", (req, res) => {

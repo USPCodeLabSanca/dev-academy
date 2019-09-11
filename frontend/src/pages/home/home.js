@@ -19,7 +19,7 @@ export function Home(){
 	const [isLoading, setIsLoading] = React.useState(true);
 
 	React.useEffect(()=>{(async ()=>{
-		const videos = await getAllVideos();
+		const videos = (await getAllVideos()).sort((a, b) => a.timestamp - b.timestamp);
 		setIsLoading(false);
 		setVideoElems(
 			videos.map(({url, id, description, title}) =>

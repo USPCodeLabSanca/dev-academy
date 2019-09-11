@@ -29,8 +29,9 @@ function CreateVideo({
 		descriptionRef.current.value = "";
 		urlRef.current.value = "";
 
-		const id = (await api.post("/videos", newVideo)).data.data;
+		const {id, timestamp} = (await api.post("/videos", newVideo)).data.data;
 		newVideo.id = id;
+		newVideo.timestamp = timestamp;
 		alert("Video salvo com sucesso!");
 		onCreation(newVideo);
 	}
@@ -90,7 +91,7 @@ const VideoList = React.forwardRef((props, ref) => {
 	const [isLoading, setIsLoading] = React.useState(true);
 
 	React.useEffect(()=>{(async ()=>{
-		setVideos((await getAllVideos()).reverse());
+		setVideos((await getAllVideos()).sort((a, b) => a.timestamp - b.timestamp));
 		setIsLoading(false);
 	})()}, []);
 
