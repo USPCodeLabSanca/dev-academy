@@ -167,10 +167,22 @@ Por fim, deve ser importado no arquivo .js com
 import axios from "axios";
 ```
 
-## Entrega 1 - FrontEnd 
-Sugere-se começar o desenvolvimento da aplicação pelo design das páginas.
-Caso desejado, é possível desenhar todo o design da aplicação com alguma ferramenta de prototipação, como o <a href = "https://marvelapp.com/">Marvel App </a> ou <a href = "https://www.adobe.com/br/products/xd.html">Adobe XD</a>
+## Entrega 1 - FrontEnd não persistivo
+Sugere-se começar o desenvolvimento da aplicação pelo **design** das páginas, bem como sua implementação por HTML/Tailwind/CSS. Caso desejado, é possível desenhar todo o design da aplicação com alguma ferramenta de **prototipação**, como o <a href = "https://marvelapp.com/">Marvel App </a> ou <a href = "https://www.adobe.com/br/products/xd.html">Adobe XD</a>. Exemplo de páginas mockadas:  <a href = "https://xd.adobe.com/spec/5e27eea6-f78b-4025-6032-92b13874ccdb-2816/"> Protótipo Site Digimon </a> e <a href = "">Protótipo Ganesh</a>. A aplicação **não precisa ser responsiva** <span style = "color:pink">(Mas ficaremos muito felizes se for :))</span>, ficando a cargo do desenvolvedor escolher desenvolvê-la com foco em navegação **desktop** ou **mobile**. 
 
-Exemplo de páginas mockadas:  <a href = "https://xd.adobe.com/spec/5e27eea6-f78b-4025-6032-92b13874ccdb-2816/"> Protótipo Site Digimon </a> e <a>Protótipo Ganesh</a>
-Como ainda não existe o back-end, a página gerada **não sera persistiva**, o que não é um problema, isto será feito depois. Além disso 
+Em seguida, sugere-se desenvolver a lógica da página de **gerenciamento** de vídeos, especificamente as funções de **adicionar** e **remover** vídeos, bem como retornar a lista. Futuramente, a lista de vídeos será requerida no Back-End. Por hora, sugere-se contornar este problema com a criação de um arquivo **```lista.js```** na pasta pública do projeto. Tal arquivo será importado por ```index.js``` e deverá possuir, além de uma lista inicialmente, vazias, funcoes **getLista**, **AdicionaItem** e **DeleteItem**. Componentes que se utilizem da lista também deverão importá-lo. 
+
+**Não é necessário carregar vídeos inteiros na aplicação**. A intenção é que se use o ```<embed></embed>``` de vídeos do youtube. A aplicação apenas salvará links para estes vídeos, mesmo quando o Back-End for implementado. A parte lógica das página de **Login** e **Cadastro** é amarrada ao Back-End e **não é prioridade** nesta etapa de desenvolvimento. 
+
+A página gerada **não é persistiva**, isto é, modificações na lista de vídeos se perdem ao se atualizar a página. Entretanto, deverá ser possível adicionar um vídeo pela página de gerenciamento, e acessar a lista de vídeos criados na página de vídeos. Cada página, isto é, **login**, **cadastro**, **vídeos** e **gerenciamento** **deve possuir seu próprio componente**. 
+
+Não é necessário se preocupar com o **Axios** ou com o envio de requisições e recebimento de suas respostas, que serão trabalhadas na entrega 2. 
+
+Estrutura sugerida para as pastas do projeto:
+
+<img src = "https://i.imgur.com/cMNUZZK.png">
+
+
+
+
 
