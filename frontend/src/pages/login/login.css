@@ -1,0 +1,29 @@
+.login {
+	background-color: #fafafa;
+}
+
+.login .login-container {
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+	background-color: white;
+}
+
+.login input{
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+	border-color: black;
+}
+
+.login button[type="submit"]{
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+	background-color: #F95F62;
+	color: white;
+	user-select: none;
+	transition: 100ms;
+}
+
+.login button[type="submit"]:hover, .login button[type="submit"]:focus{
+	background-color: rgb(255, 61, 65);
+}
+
+.login button[type="submit"]:active{
+	background-color: rgb(255, 42, 45);
+}

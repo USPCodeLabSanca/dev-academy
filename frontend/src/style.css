@@ -1,0 +1,18 @@
+html{
+	font-family: 'Montserrat', sans-serif;
+}
+
+body, #root, html{
+	height: 100%;
+	overflow: hidden;
+}
+
+main{
+	overflow: auto;
+}
+
+.heading{
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+}

@@ -1,0 +1,57 @@
+header{
+	position: fixed;
+	width: 100%;
+	top: -1px;
+	/* background-color: rgba(220, 220, 220, 0.7); */
+	background: linear-gradient(90deg, rgba(109, 62, 92, 0.6), rgba(255, 105, 0, 0.6), rgba(94, 200, 174, 0.6));
+	/* background-color: ; */
+	/* filter: blur(1px); */
+	/* box-shadow: 0px 1px 3px 3px rgba(220, 220, 220, 0.7); */
+}
+
+nav{
+	position: sticky;
+	color: black;
+	font-size: 25px;
+	font-weight: 300;
+}
+
+nav a{
+	padding: 0.5rem;
+}
+
+nav .selected{
+	transition: 0.3s;
+}
+
+nav .unselected{
+	transition: 0.3s;
+	/* filter: blur(1.5px) drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.2)); */
+	font-weight: bolder;
+}
+
+nav button{
+	transition: 100ms;
+	height: 100%;
+}
+
+nav button:hover, nav button:focus{
+	background-color: rgb(45, 182, 255);
+	outline: none;
+}
+
+nav button:active{
+	background-color: rgb(112, 205, 255);
+	outline: none;
+}
+
+nav li{
+	height: 100%;
+}
+
+
+nav img{
+	/* filter: grayscale(1); */
+	/* transform: scale(1.5); */
+	width: 300px;
+}

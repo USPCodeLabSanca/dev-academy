@@ -1,0 +1,49 @@
+.card{
+	background-color: white;
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-text{
+	overflow-y: auto;
+	font-size: 14px;
+}
+
+.card .card-title{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.card button{
+	border-radius: 100%;
+	width: 25px;
+	height: 25px;
+	font-size: 15px;
+	border: 0;
+	padding: 0;
+	user-select: none;
+	box-shadow: -1px 1px 4px 1px rgba(0, 0, 0, 0.3);
+	transition: 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+	background-color: #F95F62;
+	color: white;
+}
+
+.card button:hover, .card button:focus{
+	box-shadow: -2px 2px 4px 1px rgba(0, 0, 0, 0.3);
+	transform: scale(1.1);
+	outline: 0;
+}
+
+.card button.disabled, .card button.disabled:hover, .card button.disabled:active, .card button.disabled:focus{
+	background-color: gray;
+	box-shadow: none;
+	transform: none;
+	cursor: auto;
+}
+
+.card button:active{
+	transition: 100ms;
+	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+	outline: 0;
+	transform: scale(1);
+}

@@ -1,0 +1,47 @@
+.manage {
+	background-color: #fafafa;
+	align-items: center;
+}
+
+.manage .create-video {
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+	background-color: white;
+}
+
+.manage input, .manage textarea{
+	border-color: black;
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+	resize: none;
+}
+
+.manage button[type="submit"]{
+	background-color: #F95F62;
+	color: white;
+	user-select: none;
+	transition: 100ms;
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+	justify-self: center;
+}
+
+.manage button[type="submit"]:hover, .manage button[type="submit"]:focus{
+	background-color: rgb(255, 57, 60);
+}
+
+.manage button[type="submit"]:active{
+	background-color: rgb(255, 19, 23);
+}
+
+.list-videos{
+	box-shadow: -1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+	background-color: white;
+}
+
+.manage{
+	display: grid;
+	/* padding-top: 2rem; */
+	grid-template-columns: 50% 50%;
+	grid-template-rows: 80vh;
+	/* height: 80vh; */
+	justify-items: center;
+	align-content: center;
+}

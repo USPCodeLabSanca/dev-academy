@@ -1,0 +1,4 @@
+node_modules
+build
+firebase-authentication.json
+*.code-workspace
