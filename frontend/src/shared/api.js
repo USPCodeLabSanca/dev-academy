@@ -1,6 +1,7 @@
 import Axios from "axios";
 
-export const backendURL = 'https://us-central1-dev-academy-13a77.cloudfunctions.net/backend';
+export const backendURL = 'http://localhost:3000';
+// export const backendURL = 'https://us-central1-dev-academy-13a77.cloudfunctions.net/backend';
 
 let token = null;
 

@@ -25,9 +25,13 @@ function CreateVideo({
 		const description = descriptionRef.current.value.trim();
 		const newVideo = {url, title, description};
 
+		titleRef.current.value = "";
+		descriptionRef.current.value = "";
+		urlRef.current.value = "";
+
 		const id = (await api.post("/videos", newVideo)).data.data;
 		newVideo.id = id;
-		console.log(newVideo);
+		alert("Video salvo com sucesso!");
 		onCreation(newVideo);
 	}
 
@@ -74,7 +78,7 @@ function CreateVideo({
 }
 
 function getAllVideos(){
-	return api.get("/videos").then(response => {
+	return api.get("/videos/management").then(response => {
 		return response.data;
 	}).then((data)=>{
 		return data;

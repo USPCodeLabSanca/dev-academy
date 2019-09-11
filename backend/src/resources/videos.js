@@ -12,14 +12,25 @@ router.post("/", async (req, res) => {
 	const url = req.body.url;
 	const description = req.body.description;
 	const ownerEmail = req.userEmail;
+	const timestamp = Date.now();
 
 	if(!title) return res.status(400).send(Response.error("Invalid title"));
 	if(!url) return res.status(400).send(Response.error("Invalid url"));
 	if(!description) return res.status(400).send(Response.error("Invalid description"));
 
-	videoCollection.add({title, url, description, ownerEmail}).then((snapshot)=>{
-		res.status(200).send(Response.success("ok", snapshot.id));
-	});
+	if(ownerEmail !== "admin@codelab"){
+		const userVideosCount = 0;
+		const allVideosSnapshots = await videoCollection.get();
+		allVideosSnapshots.forEach((snapshot) => {
+			if(snapshot.data().ownerEmail === req.userEmail)
+				userVideosCount++;
+		});
+		if(userVideosCount > 10)
+			return res.status(400).send(Response.error("Cannot post more than 10 videos. Please delete some"));
+	}
+
+	await videoCollection.add({title, url, description, ownerEmail, timestamp})
+	res.status(200).send(Response.success("ok", snapshot.id));
 });
 
 router.get("/", (req, res) => {
@@ -34,16 +45,29 @@ router.get("/", (req, res) => {
 	});
 });
 
-router.get("/:id", (req, res) => {
+router.get("/management", async (req, res) => {
+	if(!req.userEmail) return res.status(400).send(Response.error("You must be logged in"));
+
+	const videos = [];
+	const snapshots = await videoCollection.get();
+	snapshots.forEach((snapshot)=>{
+		const data = snapshot.data();
+		if(data.ownerEmail !== req.userEmail && req.userEmail !== "admin@codelab") return;
+		data.id = snapshot.id;
+		videos.push(data);
+	});
+	res.status(200).send(videos);
+});
+
+router.get("/:id", async (req, res) => {
 	const videoId = req.params.id;
 	if(!videoId) return res.status(400).send(Response.error("No video ID"));
 
-	videoCollection.doc(videoId).get().then((snapshot) => {
-		const data = snapshot.data();
-		if(!data) return res.status(400).send(Response.error("Invalid Id"));
-		data.id = snapshot.id;
-		res.status(200).send(data);
-	});
+	const snapshot = await videoCollection.doc(videoId).get()
+	const data = snapshot.data();
+	if(!data) return res.status(400).send(Response.error("Invalid Id"));
+	data.id = snapshot.id;
+	res.status(200).send(data);
 });
 
 router.delete("/:id", async (req, res) => {
@@ -52,12 +76,12 @@ router.delete("/:id", async (req, res) => {
 	const videoId = req.params.id;
 	if(!videoId) return res.status(400).send(Response.error("No video ID"));
 
-	// let videoSnapshot = await videoCollection.doc(videoId).get();
+	let videoSnapshot = await videoCollection.doc(videoId).get();
 
-	// if(!videoSnapshot.exists)
-	// 	return res.status(400).send(Response.error("Video does not exist"));
-	// if(videoSnapshot.data().ownerEmail !== req.userEmail)
-	// 	return res.status(400).send(Response.error("Not enough permissions"));
+	if(!videoSnapshot.exists)
+		return res.status(400).send(Response.error("Video does not exist"));
+	if(videoSnapshot.data().ownerEmail !== req.userEmail && req.userEmail !== "admin@codelab")
+		return res.status(400).send(Response.error("Not enough permissions"));
 
 	await videoCollection.doc(videoId).delete();
 	res.status(200).send(Response.success("ok"));

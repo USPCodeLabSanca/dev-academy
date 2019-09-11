@@ -38,9 +38,10 @@ router.post("/login", async (req, res) => {
 	if(!email) return res.status(400).send(Response.error("Invalid email"));
 	if(!password) return res.status(400).send(Response.error("Invalid password"));
 
-	const hashed = (await usersCollection.doc(email).get()).data().password;
-	if(!hashed) return res.status(400).send(Response.error("invalid credentials"));
+	const user = await usersCollection.doc(email).get();
+	if(!user.exists) return res.status(400).send(Response.error("invalid credentials"));
 
+	const hashed = user.data().password;
 	if(!await bcrypt.compare(password, hashed))
 		return res.status(400).send(Response.error("invalid credentials"));
 
