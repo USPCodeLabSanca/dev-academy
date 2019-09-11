@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 	if(!description) return res.status(400).send(Response.error("Invalid description"));
 
 	if(ownerEmail !== "admin@codelab"){
-		const userVideosCount = 0;
+		let userVideosCount = 0;
 		const allVideosSnapshots = await videoCollection.get();
 		allVideosSnapshots.forEach((snapshot) => {
 			if(snapshot.data().ownerEmail === req.userEmail)
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 			return res.status(400).send(Response.error("Cannot post more than 10 videos. Please delete some"));
 	}
 
-	await videoCollection.add({title, url, description, ownerEmail, timestamp})
+	let snapshot = await videoCollection.add({title, url, description, ownerEmail, timestamp})
 	res.status(200).send(Response.success("ok", snapshot.id));
 });
 
