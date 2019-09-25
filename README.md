@@ -194,6 +194,250 @@ Login: public@gmail.com
 Senha: public
 
 
+# Especificações backend
 
+Este documento tem como objetivo especificar o backend do projeto dev.academy do USPCodeLab. Será utilizada a arquitetura REST junto com o protocolo HTTP.
+
+Material de apoio:<a href = "http://ucl-sanca.xyz/slides-node">Tutorial básico de Node/Express</a> 
+
+## Uma breve descrição de REST
+
+**REST** (Representational state transfer) é uma arquitetura para organizar APIs (como um backend). Ela descreve o significado semântico de cada parâmetro de uma requisição HTTP. Um HTTP Request tem os seguintes parâmetros:
+
+![HTTP Request](https://i.imgur.com/OIV2TQc.png")
+
+- **Método**: descrevem a ação do seu Request. Os mais populares métodos são:
+	- **GET**: Ação de ler dados.
+	- **POST**: Ação de escrever dados.
+	- **DELETE**: Ação de deletar dados.
+	- **PATCH**: Ação de modificar dados já existentes.
+- **URI, Path ou Endpoint**: é um identificador de recurso. Descreve qual o recurso que o Request está acessando. Exemplo de um Path: “/users/admin.json”
+
+- **Headers**: Informações adicionais sobre o Request. Normalmente descrevem coisas como permissões, tipo do conteúdo, etc…
+
+- **Body**: Corpo da requisição. O corpo contém as principais informações da requisição. Em REST, o conteúdo deve ser no formato JSON.
+
+Cada requisição deve ter uma resposta (tambem no formato HTTP). Uma resposta tem os seguintes parâmetros:
+
+![HTTP Request](https://i.imgur.com/zedg9Om.png")
+
+- **Status Code**: O Status Code de uma resposta indica se o Request foi bem sucedido ou não. Alguns status code famosos são:
+	- 200: OK! Deu tudo certo!
+	- 404: Não encontrado. O recurso ao qual o Request se refere não pode ser encontrado.
+	- 500: Erro interno do servidor. O servidor fez alguma besteira.
+
+- **Headers**: Análogos aos headers de requisições, porêm são dados adicionais à resposta.
+
+- **body**: Tambem análogo ao corpo de requisições. É onde os dados respondidos devem ser enviados, no formato JSON.
+
+Em REST, cada requisição deve ser referente a um recurso do servidor (especificado pelo endpoint). O método da requisição deve descrever a ação a ser tomada neste recurso (GET - ler, POST - criar novo, DELETE - deletar, PATCH - editar). O corpo contem os dados necessarios para a ação desejada (exemplo: informações de um usuario para um login).
+
+A resposta da requisição requer apenas que o Status Code seja semântico.
+
+## Especificação
+Index:
+- [Usuário](#usuário)
+- [Video](#Vídeo)
+
+### Usuário
+
+Index:
+- [Dados](#dados-dos-usuários)
+- [Criação](#criação-de-usuario)
+- [Login](#login)
+- [Listagem](#listar-todos-os-usuarios)
+- [Deleção](#deletar-usuario)
+
+#### Dados dos usuários
+
+Contém os seguintes dados referentes aos usuários:
+- Email
+- Senha Criptografada
+
+#### Criação de usuario
+Método: POST <br>
+Endpoint: /users <br>
+Não requer autenticação <br>
+Corpo da requisição:
+```
+{
+	email: string,
+	password: string
+}
+```
+Corpo da resposta quando sucesso (200): Vazio
+
+Corpo da resposta quando email invalido (400):
+```
+{
+	message: "Email is not valid"
+}
+```
+Corpo da resposta quando senha invalida (400):
+```
+{
+	message: "Password is not valid"
+}
+```
+Corpo da resposta quando email já existe (400):
+```
+{
+	message: "Email is already in use"
+}
+```
+
+#### Login
+Método: POST <br>
+Endpoint: /users/login <br>
+Não requer autenticação <br>
+Corpo da requisição:
+```
+{
+	email: string,
+	password: string
+}
+```
+Corpo da resposta quando sucesso (200):
+```
+{
+	token: string
+}
+```
+Corpo da resposta quando credenciais incorretas (400):
+```
+{
+	message: "invalid email/password"
+}
+```
+
+#### Listar todos os usuarios
+Método: GET <br>
+Endpoint: /users <br>
+Não requer autenticação <br>
+Corpo da requisição: Vazio <br>
+Corpo da resposta:
+```
+{
+	users: {email: string}[]
+}
+```
+
+#### Deletar usuario
+Método: DELETE <br>
+Endpoint: /users/:id <br>
+requer autenticação (necessita um token)<br>
+Corpo da requisição: Vazio <br>
+Corpo da resposta quando sucesso(200): Vazio
+
+Corpo da resposta quando não se está logado (400)
+```
+{
+	message: "You must be logged in"
+}
+```
+Corpo da resposta caso o usuario não exista (400)
+```
+{
+	message: "User not found"
+}
+```
+
+O usuario só pode ser deletado por si mesmo
+
+### Vídeo
+
+- [Dados](#dados-dos-vídeos)
+- [Criação](#criação-de-um-vídeo)
+- [Listagem](#listagem-de-todos-os-vídeos)
+- [Deleção](#deletar-vídeo)
+
+#### Dados dos vídeos
+
+Contem os seguintes dados de vídeos:
+- timestamp
+- email do usuário criador
+- url do video
+- nome do video
+- descrição do video
+- ID do video
+
+#### Criação de um vídeo
+Método: POST <br>
+Endpoint: /videos <br>
+Requer autenticação <br>
+Corpo da requisição:
+```
+{
+	timestamp: number,
+	ownerEmail: string,
+	url: string,
+	title: string,
+	description: string
+}
+```
+Corpo da resposta quando sucessor (200):
+```
+{
+	videoId: string
+}
+```
+Corpo da resposta quando não se esta logado (400):
+```
+{
+	message: "You must be logged in"
+}
+```
+Corpo da resposta quando alguma informação do video esta incorreta (400):
+```
+{
+	message: "invalid video info"
+}
+```
+#### Listagem de todos os vídeos
+Método: GET<br>
+Endpoint: /videos<br>
+Não requer autenticação<br>
+Corpo da requisição: Vazio<br>
+Corpo da resposta:
+```
+{
+	videos: {
+		timestamp: number,
+		ownerEmail: string,
+		url: string,
+		title: string,
+		description: string,
+		id: string
+	}[]
+}
+```
+
+#### Deletar vídeo
+Método: DELETE<br>
+Endpoint: /videos/:id<br>
+requer autenticação<br>
+Corpo da requisição: Vazio<br>
+Corpo da resposta quando sucesso (200): Vazio
+
+Corpo da resposta quando não se está logado:
+```
+{
+	message: "You must be logged in"
+}
+```
+Corpo da resposta quando o video não é do usuario logado (400):
+```
+{
+	message: "Not enough permissions"
+}
+```
+Corpo da resposta quando o video não existe (400):
+```
+{
+	message: "video not found"
+}
+```
+
+O vídeo só pode ser deletado pelo seu criador
 
 
