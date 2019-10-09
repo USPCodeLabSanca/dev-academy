@@ -223,7 +223,7 @@ Ir para o terminal
 
 Em seguida, logar na conta do google (Abrirá um pop-up no navegador) e concordar com permissões. A mensagem deverá ser retornada no terminal:
 
-```bash
+```
 Waiting for authentication...
 
 ✔  Success! Logged in as seuemail@gmail.com
@@ -231,7 +231,7 @@ Waiting for authentication...
 
 Voltar para o terminal.
 
-```bash
+```
 npx firebase-tools init
 ```
 
@@ -260,7 +260,8 @@ t, <a> to toggle all, <i> to invert selection)
 
 Selecionar **com a barra de espaço apenas functions**. Apertar enter.
 
-```bash
+```
+
 ? Please select an option: (Use arrow keys)
 ❯ Use an existing project
   Create a new project
@@ -270,7 +271,7 @@ Selecionar **com a barra de espaço apenas functions**. Apertar enter.
 
 Com o **enter, selecionar use an existing project**
 
-```bash
+```
 ? Please select an option: Use an existing project
 ? Select a default Firebase project for this directory: (Use arrow keys)
 ❯ myproject-2e373 (myProject)
@@ -278,7 +279,7 @@ Com o **enter, selecionar use an existing project**
 
 Com o **enter, escolher seu projeto**.
 
-```bash
+```
 ? What language would you like to use to write Cloud Functions? (Use arrow keys)
 ❯ JavaScript
   TypeScript
@@ -286,7 +287,7 @@ Com o **enter, escolher seu projeto**.
 
 Escolher javascript. Escolher y para o linter.
 
-```bash
+```
 ? What language would you like to use to write Cloud Functions? JavaScript
 ? Do you want to use ESLint to catch probable bugs and enforce style? Yes
 ✔  Wrote functions/package.json
@@ -357,6 +358,88 @@ Project Console: https://console.firebase.google.com/project/myproject-2e373/ove
 ```
 
 Abra o primeiro link no navegador. ```Hello from Firebase!``` será retornado!
+
+No projeto, utilizaremos o **Express**, biblioteca de node responsável por responder requisições HTTP. 
+
+## Configurando o Express na sua Função do Firebase 
+
+Primeiramente, instale o express na pasta **functions**: 
+
+```bash
+cd functions
+npm install express
+```
+
+Em **index.js**: 
+1. Importar o express no começo do arquivo: 
+  ```js
+  const express = require('express');
+  ```
+2. Inicializar o expres em uma variável app: 
+  ```js
+  const app = express();
+  ```
+3. Substituir o callback de functions.https.onRequest por app: 
+  ```js
+  exports.helloWorld = functions.https.onRequest(app);
+  ```
+4. Criar a função desejada: 
+  ```js
+    app.get("/oi", (req,res) => {
+      res.send("Bom dia do angra");
+  })
+  ``` 
+Index final: 
+
+```js
+const functions = require('firebase-functions');
+const express = require('express');
+
+const app = express();
+
+app.get("/oi", (req,res) => {
+    res.send("Bom dia do angra");
+})
+
+exports.helloWorld = functions.https.onRequest(app);
+
+```
+
+### Testando/Deployando seu backend 
+O backend pode ser testado localmente, o que usualmente é mais rápido, ou deployado, o que permite seu uso por qualquer um com acesso à url.
+
+#### Testando: 
+```bash
+  npx firebase-tools serve
+```
+Neste caso, será retornado:
+
+```
+=== Serving from '/home/USUARIOS/9793502/Backend'...
+⚠  Your requested "node" version "8" doesn't match your global version "10"
+✔  functions: Emulator started at http://localhost:5000
+i  functions: Watching "/home/USUARIOS/9793502/Backend/functions" for Cloud Functions...
+✔  functions[helloWorld]: http function initialized (http://localhost:5000/myproject-2e373/us-central1/helloWorld).
+i  functions: Beginning execution of "helloWorld"
+i  functions: Finished "helloWorld" in ~1s
+```
+
+Neste caso, o **root** de teste será http://localhost:5000/myproject-2e373/us-central1/helloWorld. 
+
+A resposta à requisições get dadas no endpoint /oi podem ser acessadas, portanto, em http://localhost:5000/myproject-2e373/us-central1/helloWorld/oi
+
+#### Deployando
+```bash
+  npx firebase-tools deploy
+```
+
+**Observações**: 
+
+1. exports da função deve ser última coisa do código.
+2. O link das funções de seu projeto estão disponíveis em https://console.firebase.google.com/project/NOME_DO_SEU_PROJETO/functions/list
+3. Usualmente, cria-se apenas uma função e controla-se os recursos da aplicação pelos endpoints de argumento em ```app.algo('/endpoint')```
+4. O "caminho root" é o que aparece na lista em **2.**. No caso, https://us-central1-myproject-2e373.cloudfunctions.net/helloWorld.
+5. Para utilizar o recurso em "/oi", portanto, deve-se acessar a URL https://us-central1-myproject-2e373.cloudfunctions.net/helloWorld/oi
 
 ## Uma breve descrição de REST
 
