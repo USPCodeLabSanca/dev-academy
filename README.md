@@ -200,6 +200,165 @@ Este documento tem como objetivo especificar o backend do projeto dev.academy do
 
 Material de apoio:<a href = "http://ucl-sanca.xyz/slides-node">Tutorial básico de Node/Express</a> 
 
+## Criando o projeto no firebase
+
+- Criar conta em firebase.google.com
+- Ir em console, console.firebase.google.com/
+- Criar um projeto com um nome sem caracteres especiais
+- Não ativar o google analytics
+
+Ir para o terminal
+
+## Configurando o Projeto 
+
+- **No mesmo nível da pasta Frontend**, criar uma pasta Backend
+
+```bash
+    mkdir Backend
+    cd Backend
+    npx firebase-tools
+    npx firebase-tools login
+    n
+```
+
+Em seguida, logar na conta do google (Abrirá um pop-up no navegador) e concordar com permissões. A mensagem deverá ser retornada no terminal:
+
+```
+Waiting for authentication...
+
+✔  Success! Logged in as seuemail@gmail.com
+```
+
+Voltar para o terminal.
+
+```
+npx firebase-tools init
+```
+
+O terminal retornará:
+
+```bash
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/USUARIOS/9793502/Backend
+
+? Which Firebase CLI features do you want to set up for this folder? Press Space
+ to select features, then Enter to confirm your choices. (Press <space> to selec
+t, <a> to toggle all, <i> to invert selection)
+ ◯ Database: Deploy Firebase Realtime Database Rules
+ ◯ Firestore: Deploy rules and create indexes for Firestore
+❯◯ Functions: Configure and deploy Cloud Functions
+ ◯ Hosting: Configure and deploy Firebase Hosting sites
+ ◯ Storage: Deploy Cloud Storage security rules
+```
+
+Selecionar **com a barra de espaço apenas functions**. Apertar enter.
+
+```
+
+? Please select an option: (Use arrow keys)
+❯ Use an existing project
+  Create a new project
+  Add Firebase to an existing Google Cloud Platform project
+  Don't set up a default project
+```
+
+Com o **enter, selecionar use an existing project**
+
+```
+? Please select an option: Use an existing project
+? Select a default Firebase project for this directory: (Use arrow keys)
+❯ myproject-2e373 (myProject)
+```
+
+Com o **enter, escolher seu projeto**.
+
+```
+? What language would you like to use to write Cloud Functions? (Use arrow keys)
+❯ JavaScript
+  TypeScript
+```
+
+Escolher javascript. Escolher y para o linter.
+
+```
+? What language would you like to use to write Cloud Functions? JavaScript
+? Do you want to use ESLint to catch probable bugs and enforce style? Yes
+✔  Wrote functions/package.json
+✔  Wrote functions/.eslintrc.json
+✔  Wrote functions/index.js
+✔  Wrote functions/.gitignore
+? Do you want to install dependencies with npm now? (Y/n)
+```
+
+Escolha **Y**.
+
+Foram criados vários arquivos:
+
+- firebaserc - Arquivo de especificações.Não será manipulado.
+- gitignore - Arquivo que define quais arquivos e pastas serão ignorados pelo git. Não será manipulado.
+- **./functions** - Pasta principal do Projeto:
+  1. .gitignore 
+  2. package.json - Configurações do projeto firebase. Contém dependencias, scripts e o nome do projeto. Não será Manipulado
+  3. eslintrc.json - Configurações do Linter. Não será manipulado
+  4. **index.js** -  **Arquivo principal**
+
+## Criando uma função 
+
+  index.js contém inicialmente: 
+
+```javascript
+  const functions = require('firebase-functions');
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//  response.send("Hello from Firebase!");
+// });
+
+```
+
+Descomente o código: 
+
+```javascript
+const functions = require('firebase-functions');
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+
+exports.helloWorld = functions.https.onRequest((request, response) => {
+  response.send("Hello from Firebase!");
+});
+```
+
+Em seguida, na pasta **Backend**, utilize o comando: 
+
+```bash
+  npx firebase-tools deploy --only functions
+```
+
+**Isto irá demorar**.
+
+O console retornará o link do projeto na última linha: 
+
+```bash
+✔  functions[helloWorld(us-central1)]: Successful create operation. 
+Function URL (helloWorld): https://us-central1-myproject-2e373.cloudfunctions.net/helloWorld
+
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/myproject-2e373/overview
+```
+
+Abra o primeiro link no navegador. ```Hello from Firebase!``` será retornado!
+
 ## Uma breve descrição de REST
 
 **REST** (Representational state transfer) é uma arquitetura para organizar APIs (como um backend). Ela descreve o significado semântico de cada parâmetro de uma requisição HTTP. Um HTTP Request tem os seguintes parâmetros:
