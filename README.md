@@ -223,7 +223,7 @@ Ir para o terminal
 
 Em seguida, logar na conta do google (Abrirá um pop-up no navegador) e concordar com permissões. A mensagem deverá ser retornada no terminal:
 
-```
+```bash
 Waiting for authentication...
 
 ✔  Success! Logged in as seuemail@gmail.com
@@ -231,7 +231,7 @@ Waiting for authentication...
 
 Voltar para o terminal.
 
-```
+```bash
 npx firebase-tools init
 ```
 
@@ -260,8 +260,7 @@ t, <a> to toggle all, <i> to invert selection)
 
 Selecionar **com a barra de espaço apenas functions**. Apertar enter.
 
-```
-
+```bash
 ? Please select an option: (Use arrow keys)
 ❯ Use an existing project
   Create a new project
@@ -271,7 +270,7 @@ Selecionar **com a barra de espaço apenas functions**. Apertar enter.
 
 Com o **enter, selecionar use an existing project**
 
-```
+```bash
 ? Please select an option: Use an existing project
 ? Select a default Firebase project for this directory: (Use arrow keys)
 ❯ myproject-2e373 (myProject)
@@ -279,7 +278,7 @@ Com o **enter, selecionar use an existing project**
 
 Com o **enter, escolher seu projeto**.
 
-```
+```bash
 ? What language would you like to use to write Cloud Functions? (Use arrow keys)
 ❯ JavaScript
   TypeScript
@@ -287,7 +286,7 @@ Com o **enter, escolher seu projeto**.
 
 Escolher javascript. Escolher y para o linter.
 
-```
+```bash
 ? What language would you like to use to write Cloud Functions? JavaScript
 ? Do you want to use ESLint to catch probable bugs and enforce style? Yes
 ✔  Wrote functions/package.json
